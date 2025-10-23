@@ -1,3 +1,14 @@
+import os
+import pandas as pd
+import itertools
+
+property_id = "510027342"
+starting_date = "8daysAgo"
+ending_date = "yesterday"
+
+os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = 'my-project-saleh-18dd914e9923.json'
+
+
 from google.analytics.data_v1beta import BetaAnalyticsDataClient
 from google.analytics.data_v1beta.types import (
     DateRange,
@@ -5,26 +16,18 @@ from google.analytics.data_v1beta.types import (
     Metric,
     RunReportRequest,
 )
-
-
-
-"""Runs a simple report on a Google Analytics 4 property."""
-# TODO(developer): Uncomment this variable and replace with your
-#  Google Analytics 4 property ID before running the sample.
-property_id = "372574318"
-
-# Using a default constructor instructs the client to use the credentials
-# specified in GOOGLE_APPLICATION_CREDENTIALS environment variable.
 client = BetaAnalyticsDataClient()
 
-request = RunReportRequest(
+request_api = RunReportRequest(
     property=f"properties/{property_id}",
-    dimensions=[Dimension(name="city")],
-    metrics=[Metric(name="activeUsers")],
-    date_ranges=[DateRange(start_date="2020-03-31", end_date="today")],
-)
-response = client.run_report(request)
+    dimensions=[
+        Dimension(name="landingPagePlusQueryString")
+        ],
+        metrics=[
+            Metric(name="sessions")
+        ],
+        date_ranges=[DateRange(start_date=starting_date, end_date=ending_date)],
+    )
+response = client.run_report(request_api)
 
-print("Report result:")
-for row in response.rows:
-    print(row.dimension_values[0].value, row.metric_values[0].value)
+print(response)
