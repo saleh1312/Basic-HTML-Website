@@ -2,11 +2,11 @@ import os
 import pandas as pd
 import itertools
 
-property_id = "510027342"
+property_id = "510025231"
 starting_date = "8daysAgo"
 ending_date = "yesterday"
 
-os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = 'my-project-saleh-18dd914e9923.json'
+os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = 'vigilant-design-403810-c6c4868fd50a.json'
 
 
 from google.analytics.data_v1beta import BetaAnalyticsDataClient
