@@ -42,6 +42,11 @@
     </script>
 </head>
 <body>
+     <script>
+    // intentionally generate error to test Sentry
+    console.log("Testing Sentry...");
+    myUndefinedFunction(); // this will trigger an error
+  </script>
     <nav>
         <ul>
             <li><a href="index.html">Home</a></li>
